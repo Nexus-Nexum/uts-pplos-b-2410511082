@@ -21,3 +21,18 @@ services:
     build: ./services/service-2
     ports:
       - "8001:80"
+  
+  service-3:
+    build: ./services/service-3
+
+  db-auth:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: auth_db
+      MYSQL_ROOT_PASSWORD: password
+
+  db-donor:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: donor_db
+      MYSQL_ROOT_PASSWORD: password
