@@ -16,3 +16,8 @@ services:
       - "3001:3001"
     environment:
       - JWT_SECRET=
+
+  service-2:
+    build: ./services/service-2
+    ports:
+      - "8001:80"
