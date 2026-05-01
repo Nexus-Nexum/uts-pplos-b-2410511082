@@ -11,6 +11,15 @@ services:
       - service-2
       - service-3
 
+  db-system:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+
   auth-service:
     build: ./services/auth-service
     ports:

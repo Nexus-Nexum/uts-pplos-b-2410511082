@@ -1,25 +1,26 @@
 <?php
+require_once 'controllers/DonorController.php';
+
 header('Content-Type: application/json');
-$method = $_SERVER['REQUEST_METHOD'];
+
+$controller = new DonorController();
+
 $path = $_GET['url'] ?? '';
 
-$stok_darah = [
-    ["golongan" => "A+", "stok" => 15],
-    ["golongan" => "B+", "stok" => 8],
-    ["golongan" => "O", "stok" => 25]
-];
+$method = $_SERVER['REQUEST_METHOD'];
 
 if ($path == 'stok' && $method == 'GET') {
-    echo json_encode(["status" => "success", "data" => $stok_darah]);
+    $controller->listStok();
 } 
 elseif ($path == 'register' && $method == 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
-    echo json_encode([
-        "status" => "success", 
-        "message" => "Pendonor " . ($input['nama'] ?? 'Anonim') . " berhasil didaftar!"
-    ]);
+
+    $controller->register($input);
 } 
 else {
     http_response_code(404);
-    echo json_encode(["message" => "Endpoint di Service-2 gak ketemu"]);
+    echo json_encode([
+        "status" => "error",
+        "message" => "Endpoint gak ketemu, cek lagi path atau method-nya!"
+    ]);
 }
