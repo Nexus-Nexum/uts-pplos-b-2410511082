@@ -6,7 +6,7 @@ class DonorModel {
         $this->db = new mysqli($host, $user, $pass, $dbname);
 
         if ($this->db->connect_error) {
-            die("Koneksi gagal lu: " . $this->db->connect_error);
+            die("Koneksi gagal: " . $this->db->connect_error);
         }
     }
 
