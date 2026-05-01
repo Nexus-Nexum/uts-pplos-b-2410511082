@@ -1,30 +1,40 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const app = express();
-const PORT = 3001;
-const SECRET = process.env.JWT_SECRET || 'default_secret';
-
 app.use(express.json());
 
-const users = [{ id: 1, username: 'admin', password: 'password123' }];
+const SECRET = 'paruk';
+const REFRESH_SECRET = 'farouq';
+
+let refreshTokens = []; 
 
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
-    const user = users.find(u => u.username === username && u.password === password);
-
-    if (user) {
-        const token = jwt.sign({ id: user.id, user: user.username }, SECRET, { expiresIn: '1h' });
-        return res.json({ 
-            status: 'success',
-            message: 'Login Berhasil!', 
-            token 
-        });
+    if (username === 'admin' && password === 'admin') {
+        const accessToken = jwt.sign({ user: username }, SECRET, { expiresIn: '15m' }); 
+        const refreshToken = jwt.sign({ user: username }, REFRESH_SECRET, { expiresIn: '7d' }); 
+        
+        refreshTokens.push(refreshToken); 
+        return res.json({ accessToken, refreshToken });
     }
-    res.status(401).json({ message: 'Login Gagal' });
+    res.status(401).json({ message: "Login gagal !" });
 });
 
-app.get('/verify', (req, res) => {
-    res.json({ message: 'Auth Service is UP' });
+app.post('/refresh', (req, res) => {
+    const { token } = req.body;
+    if (!token || !refreshTokens.includes(token)) return res.sendStatus(403);
+    
+    jwt.verify(token, REFRESH_SECRET, (err, user) => {
+        if (err) return res.sendStatus(403);
+        const accessToken = jwt.sign({ user: user.user }, SECRET, { expiresIn: '15m' });
+        res.json({ accessToken });
+    });
 });
 
-app.listen(PORT, () => console.log(`Auth Service jalan di port ${PORT}`));
+app.post('/logout', (req, res) => {
+    const { token } = req.body;
+    refreshTokens = refreshTokens.filter(t => t !== token); 
+    res.json({ message: "Logout berhasil, token diblacklist!" });
+});
+
+app.listen(3001, () => console.log("Auth Service Full Poin 4 Jalan!"));
