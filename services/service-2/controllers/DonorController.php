@@ -26,16 +26,16 @@ class DonorController {
     }
 
     public function register($input) {
-        if (empty($input['nama']) || empty($input['gol_darah'])) {
+        if (empty($input['nama']) || empty($input['golongan_darah'])) {
             http_response_code(422);
             echo json_encode([
                 "status" => "error",
-                "message" => "Nama sama Golongan Darah jangan dikosongin lu!"
+                "message" => "Nama sama Golongan Darah jangan dikosongin!"
             ]);
             return;
         }
 
-        $id = $this->model->savePendonor($input['nama'], $input['gol_darah']);
+        $id = $this->model->savePendonor($input['nama'], $input['golongan_darah']);
         
         echo json_encode([
             "status" => "success",

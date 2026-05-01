@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 
 $controller = new DonorController();
 
-$path = $_GET['url'] ?? '';
+$path = trim($_SERVER['REQUEST_URI'], '/');
 
 $method = $_SERVER['REQUEST_METHOD'];
 

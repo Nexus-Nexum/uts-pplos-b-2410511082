@@ -26,7 +26,7 @@ class DonorModel {
     }
 
     public function savePendonor($nama, $gol) {
-        $stmt = $this->db->prepare("INSERT INTO pendonors (nama, gol_darah) VALUES (?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO pendonors (nama, golongan_darah) VALUES (?, ?)");
         $stmt->bind_param("ss", $nama, $gol);
         $stmt->execute();
         return $stmt->insert_id;
