@@ -32,3 +32,19 @@ CREATE TABLE IF NOT EXISTS riwayat_stok (
     keterangan TEXT,
     FOREIGN KEY (stok_id) REFERENCES stok_darah(id)
 );
+
+USE auth_db;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE,
+    password VARCHAR(255) NULL,
+    email VARCHAR(100) UNIQUE,
+    nama VARCHAR(100),
+    foto VARCHAR(255),        
+    oauth_provider VARCHAR(20) DEFAULT NULL, 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT IGNORE INTO users (username, password, email, nama) 
+VALUES ('admin', 'admin', 'admin@mail.com', 'Administrator');
