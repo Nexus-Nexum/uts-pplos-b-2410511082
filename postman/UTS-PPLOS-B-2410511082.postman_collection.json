@@ -1,0 +1,139 @@
+{
+  "info": {
+    "_postman_id": "10172ce4-3966-4b2a-8d85-0fc068383985",
+    "name": "UTS-PPLOS-B-2410511082",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "39229887"
+  },
+  "item": [
+    {
+      "name": "stok donor",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/donor/stok",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "donor",
+            "stok"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "donor register",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nama\": \"Farouq Reborn\",\r\n    \"golongan_darah\": \"B\",\r\n    \"jumlah_kantong\": 10,\r\n    \"lokasi\": \"RS Harapan Bangsa\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/donor/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "donor",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "donor update",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nama\": \"Farouq Adzmi (Update #1)\",\r\n    \"golongan_darah\": \"O\",\r\n    \"jumlah_kantong\": 999,\r\n    \"lokasi\": \"PMI Pusat Baru\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/donor/update/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "donor",
+            "update",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "delete donor",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/donor/delete/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "donor",
+            "delete",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
