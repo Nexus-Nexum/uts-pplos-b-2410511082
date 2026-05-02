@@ -18,8 +18,9 @@ app.use(passport.session());
 
 passport.use(new GoogleStrategy({
     clientID: '682865857075-4bvr72dabb6e7qh73qm2h7q53gvgiq19.apps.googleusercontent.com', 
-    clientSecret: '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',
-    callbackURL: 'http://localhost:8080/auth/callback' 
+    clientSecret: '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',
+    callbackURL: 'http://localhost:8081/auth/callback',
+    scope: ['profile', 'email'] 
   },
   (accessToken, refreshToken, profile, done) => {
     const user = {
@@ -59,7 +60,7 @@ app.post('/refresh', (req, res) => {
 app.post('/logout', (req, res) => {
     const { token } = req.body;
     refreshTokens = refreshTokens.filter(t => t !== token); 
-    res.json({ message: "Logout berhasil, token diblacklist loh!" });
+    res.json({ message: "Logout berhasil, token diblacklist!" });
 });
 
 
@@ -74,7 +75,7 @@ app.get('/callback', passport.authenticate('google', { failureRedirect: '/' }), 
     const token = jwt.sign({ user: email }, SECRET, { expiresIn: '15m' });
     
     res.json({
-        message: "Login OAuth Berhasil dan Data Terpetakan ke DB Lokal loh!",
+        message: "Login OAuth Berhasil dan Data Terpetakan ke DB Lokal!",
         user: { nama, email, foto, provider }, 
         token: token
     });
